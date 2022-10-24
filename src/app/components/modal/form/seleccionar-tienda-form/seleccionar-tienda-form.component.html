@@ -1,0 +1,33 @@
+<form id="seleccionarTiendaForm" [formGroup]="seleccionarTiendaForm" (ngSubmit)="seleccionarTienda()">
+	<div class="modal-header">
+		<div class="modal-title">
+			<h4 class="m-0">
+				Ingreso a tiendas
+			</h4>
+		</div>
+		<button type="button" class="close" aria-label="Close" (click)="modalClose()" *ngIf="tienda_seleccionada">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="text-center p-2" *ngIf="is_loading">
+			<img [src]="_loading" alt="loading" class="loading-max">
+		</div>
+		<div class="form-group" *ngIf="!is_loading">
+			<ngx-select formControlName="codigo_tienda" name="codigo_tienda" id="codigo_tienda" [items]="lista_tiendas_acceso_usuario" [disabled]="lista_tiendas_acceso_usuario.length == 0" [placeholder]="'Seleccione una opción'"></ngx-select>
+			<div class="invalid-feedback" *ngIf="seleccionarTiendaForm.get('codigo_tienda').hasError('required') && is_submit_form">
+				Debe seleccionar una opción
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success" [disabled]="is_loading">
+			<i class="far fa-check-circle"></i>
+			Seleccionar tienda
+		</button>
+		<button type="button" class="btn btn-dark" (click)="modalClose()" *ngIf="tienda_seleccionada">
+			<i class="fas fa-times"></i>
+			Cerrar
+		</button>
+	</div>
+</form>

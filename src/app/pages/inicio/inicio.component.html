@@ -1,0 +1,28 @@
+<div id="wrapper">
+    <app-menu-sidebar></app-menu-sidebar>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <app-menu-top></app-menu-top>
+            <div class="container-fluid">
+                <div class="text-center mt-2 mb-2" *ngIf="!isHadRole(nameRoleInfluencer)">
+                    <a routerLink="/facturacion/crear" class="mr-1 btn btn-light btn-icon-split" style="background-color: #dfdfdf;">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span class="text">Vender</span>
+                    </a>
+                    <a routerLink="/productos" class="mr-1 btn btn-light btn-icon-split" style="background-color: #dfdfdf;">
+                        <i class="fas fa-boxes"></i>
+                        <span class="text">Productos</span>
+                    </a>
+                    <a routerLink="/terceros" class="mr-1 btn btn-light btn-icon-split" style="background-color: #dfdfdf;">
+                        <i class="fas fa-users"></i>
+                        <span class="text">Clientes</span>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <img [src]="banner_1" class="img-fluid">
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

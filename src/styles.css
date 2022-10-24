@@ -1,0 +1,105 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import './assets/css/sb-admin-2.min.css';
+
+
+.cursor{
+    cursor: pointer;
+}
+.loading-max{
+    width: 30px;
+    height: 30px;
+}
+.loading-min{
+    width: 20px;
+    height: 20px;
+}
+.required-input::after{
+    content: ' (*)';
+    color: #c0392b;
+}
+.invalid-feedback{
+    display: block !important;
+}
+.accordion{
+    height: 100% !important;
+}
+.card{
+    border: none;
+    box-shadow: 0px 1px 2px 0px rgba(133, 101, 101, 0.4);
+}
+.input-transparent{
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+.input-transparent:hover{
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+.max-height{
+    height: 450px;
+    overflow-y: scroll;
+}
+.text-responsive {
+    margin-left: 4px;
+    display: inline-block;
+}
+.text-tachado {
+    text-decoration: line-through;
+}
+.modal-header{
+    background: #2B2F3E;
+    color: WHITE;
+}
+.canto-border {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #777777;
+    display: inline-block;
+}
+.canto-border-top {
+    border-top: 4px solid white;
+}
+.canto-border-bottom {
+    border-bottom: 4px solid white;
+}
+.canto-border-right {
+    border-right: 4px solid white;
+}
+.canto-border-left {
+    border-left: 4px solid white;
+}
+.color-green{
+    color: #3F8838;
+}
+input.form-calendar {
+    box-sizing: border-box;
+    outline: 0;
+    padding: .75rem;
+    position: relative;
+    width: 100%;
+}
+input[type="date"].form-calendar::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+.swal-wide{
+    width: 50rem !important;
+}
+.ngx-select__toggle {
+    height: auto !important;
+}
+@media (max-width: 620px) {
+    .text-responsive {
+        display: none;
+    }
+}

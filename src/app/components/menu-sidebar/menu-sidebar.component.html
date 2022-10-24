@@ -1,0 +1,26 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+	<div class="sidebar-brand align-items-center justify-content-center">
+		<div class="sidebar-brand-icon mb-2">
+			<img [src]="logo_blanco" class="img-fluid">
+		</div>
+	</div>
+	<hr class="sidebar-divider my-0">
+	<li class="nav-item">
+		<a class="nav-link" routerLink="/">
+			<i class="fas fa-fw fa-tachometer-alt"></i>
+			<span>Inicio</span>
+		</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" routerLink="/usuarios">
+			<i class="fas fa-users"></i>
+			<span>Gestion de usuarios</span>
+		</a>
+	</li>
+	<li class="nav-item" *ngIf="isHadRole(nameRoleVendedor) || isHadRole(nameRoleTesoreria)">
+		<a class="nav-link" routerLink="/terceros">
+			<i class="fas fa-users"></i>
+			<span>clientes</span>
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,11 @@
+
+#accordionSidebar{
+    background-color: #0F0F0F!important;
+    background-image: none !important;
+}
+.sidebar-dark .nav-item .nav-link {
+    color: white !important;
+}
+.sidebar-brand{
+    height: auto !important;
+}

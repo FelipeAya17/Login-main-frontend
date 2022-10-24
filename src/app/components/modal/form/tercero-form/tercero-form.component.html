@@ -1,0 +1,198 @@
+<form id="tercerosForm" [formGroup]="tercerosForm" (ngSubmit)="enviarTercero()">
+	<div class="modal-header">
+		<div class="modal-title">
+		<h4 class="m-0">
+			Terceros
+		</h4>
+		</div>
+		<button type="button" class="close" aria-label="Close" (click)="modalClose()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<input type="hidden" formControlName="id" id="id" name="id" *ngIf="tercerosForm.value.id != null">
+		<div class="row align-items-center">
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="tipo_documento_id" [ngClass]="{'required-input': isRequiredField('tipo_documento_id')}">Tipo documento</label>
+					<ngx-select formControlName="tipo_documento_id" name="tipo_documento_id" id="tipo_documento_id" [items]="lista_tipos_documentos" [disabled]="lista_tipos_documentos.length == 0" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('tipo_documento_id').hasError('required') && is_submit_form">
+						Debe ingresar un tipo de documento
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="numero_documento" [ngClass]="{'required-input': isRequiredField('numero_documento')}">Número documento</label>
+					<input type="number" min="0" step="1" class="form-control" [ngClass]="{'is-invalid': tercerosForm.get('numero_documento').hasError('required') && is_submit_form}" formControlName="numero_documento" id="numero_documento" name="numero_documento">
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('numero_documento').hasError('required') && is_submit_form">
+						Debe ingresar un número de documento
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="nombres" [ngClass]="{'required-input': isRequiredField('nombres')}">Nombres</label>
+					<input type="text" class="form-control" [ngClass]="{'is-invalid': tercerosForm.get('nombres').hasError('required') && is_submit_form}" formControlName="nombres" id="nombres" name="nombres">
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('nombres').hasError('required') && is_submit_form">
+						Debe ingresar un nombre
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="apellidos" [ngClass]="{'required-input': isRequiredField('apellidos')}">Apellidos</label>
+					<input type="text" class="form-control" [ngClass]="{'is-invalid': tercerosForm.get('apellidos').hasError('required') && is_submit_form}" formControlName="apellidos" id="apellidos" name="apellidos">
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('apellidos').hasError('required') && is_submit_form">
+						Debe ingresar un apellido
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="correo_electronico" [ngClass]="{'required-input': isRequiredField('correo_electronico')}">Correo electrónico</label>
+					<input type="text" class="form-control" [ngClass]="{'is-invalid': tercerosForm.get('correo_electronico').hasError('required') && is_submit_form}" formControlName="correo_electronico" id="correo_electronico" name="correo_electronico">
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('correo_electronico').hasError('required') && is_submit_form">
+						Debe ingresar un correo electrónico
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="numero_telefonico" [ngClass]="{'required-input': isRequiredField('numero_telefonico')}">Número telefónico</label>
+					<input type="number" step="1" min="0" class="form-control" [ngClass]="{'is-invalid': tercerosForm.get('numero_telefonico').hasError('required') && is_submit_form}" formControlName="numero_telefonico" id="numero_telefonico" name="numero_telefonico">
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('numero_telefonico').hasError('required') && is_submit_form">
+						Debe ingresar un número telefónico
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="numero_celular" [ngClass]="{'required-input': isRequiredField('numero_celular')}">Número celular</label>
+					<input type="number" step="1" min="0" class="form-control" [ngClass]="{'is-invalid': tercerosForm.get('numero_celular').hasError('required') && is_submit_form}" formControlName="numero_celular" id="numero_celular" name="numero_celular">
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('numero_celular').hasError('required') && is_submit_form">
+						Debe ingresar un número celular
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="genero" [ngClass]="{'required-input': isRequiredField('genero')}">Género</label>
+					<ngx-select formControlName="genero" name="genero" id="genero" [items]="lista_generos" [disabled]="lista_generos.length == 0" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('genero').hasError('required') && is_submit_form">
+						Debe seleccionar un tipo de tercero
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="(user_data.role == 'Administrador' || user_data.role == 'SuperAdministrador') && tercerosForm.value.id == null && !created_only_cliente">
+				<div class="form-group">
+					<label for="tipo_tercero" [ngClass]="{'required-input': isRequiredField('tipo_tercero')}">Tipo tercero</label>
+					<ngx-select formControlName="tipo_tercero" name="tipo_tercero" id="tipo_tercero" [items]="lista_tipos_terceros" [disabled]="lista_tipos_terceros.length == 0" (select)="seleccionarModoTercero()" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('tipo_tercero').hasError('required') && is_submit_form">
+						Debe seleccionar un tipo de tercero
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-group">
+					<label for="tipo_persona" [ngClass]="{'required-input': isRequiredField('tipo_persona')}">Tipo Persona</label>
+					<ngx-select formControlName="tipo_persona" name="tipo_persona" id="tipo_persona" [items]="lista_tipo_persona" [disabled]="lista_tipo_persona.length == 0" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('tipo_persona').hasError('required') && is_submit_form">
+						Debe seleccionar una opción
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-group">
+					<label for="responsabilidad_fiscal" [ngClass]="{'required-input': isRequiredField('responsabilidad_fiscal')}">Responsabilidad fiscal</label>
+					<ngx-select formControlName="responsabilidad_fiscal" name="responsabilidad_fiscal" id="responsabilidad_fiscal" [items]="lista_tipo_responsabilidad_fiscal" [disabled]="lista_tipo_responsabilidad_fiscal.length == 0" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('responsabilidad_fiscal').hasError('required') && is_submit_form">
+						Debe seleccionar una opción
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero != 'C'">
+				<div class="form-group">
+					<label for="password_usuario">Contraseña</label>
+					<input type="text" class="form-control" formControlName="password_usuario" id="password_usuario" name="password_usuario">
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="form-group">
+					<label for="direccion_residencia" [ngClass]="{'required-input': isRequiredField('direccion_residencia')}">Dirección residencia</label>
+					<textarea name="direccion_residencia" id="direccion_residencia" formControlName="direccion_residencia" class="form-control"></textarea>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('direccion_residencia').hasError('required') && is_submit_form">
+						Debe ingresar una dirección de residencia
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-group">
+					<label for="country_code" [ngClass]="{'required-input': isRequiredField('country_code')}">País residencia</label>
+					<ngx-select formControlName="country_code" name="country_code" id="country_code" [items]="lista_country" [disabled]="lista_country.length == 0" (select)="getListaDepartamentos()" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('country_code').hasError('required') && is_submit_form">
+						Debe seleccionar una opción
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-group">
+					<label for="state_code" [ngClass]="{'required-input': isRequiredField('state_code')}">Estado residencia</label>
+					<ngx-select formControlName="state_code" name="state_code" id="state_code" [items]="lista_state" [disabled]="lista_state.length == 0" (select)="getListaCiudades()" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('state_code').hasError('required') && is_submit_form">
+						Debe seleccionar una opción
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-group">
+					<label for="city_code" [ngClass]="{'required-input': isRequiredField('city_code')}">Ciudad residencia</label>
+					<ngx-select formControlName="city_code" name="city_code" id="city_code" [items]="lista_city" [disabled]="lista_city.length == 0" [placeholder]="'Seleccione una opción'"></ngx-select>
+					<div class="invalid-feedback" *ngIf="tercerosForm.get('city_code').hasError('required') && is_submit_form">
+						Debe seleccionar una opción
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" formControlName="mayorista" id="mayorista" name="mayorista">
+					<label class="form-check-label" for="mayorista">
+						Mayorista
+					</label>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.id != null && tercerosForm.value.tipo_tercero != 'C'">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" formControlName="activo" id="activo" name="activo">
+					<label class="form-check-label" for="activo">
+						Activo
+					</label>
+				</div>
+			</div>
+			<div class="col-md-6" *ngIf="tercerosForm.value.tipo_tercero == 'C'">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" formControlName="responsable_iva" id="responsable_iva" name="responsable_iva">
+					<label class="form-check-label" for="responsable_iva">
+						Responsable de IVA
+					</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" class="btn btn-success" [disabled]="is_loading">
+			<span *ngIf="is_loading">
+				<img [src]="_loading" width="15">
+				Enviando datos
+			</span>
+			<span *ngIf="!is_loading">
+				<i class="fa fa-save"></i>
+				Enviar datos
+			</span>
+		</button>
+		<button type="button" class="btn btn-dark" (click)="modalClose()" [disabled]="is_loading">
+			<i class="fas fa-times"></i>
+			Cerrar
+		</button>
+	</div>
+</form>

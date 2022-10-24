@@ -1,0 +1,114 @@
+<div id="wrapper">
+	<app-menu-sidebar></app-menu-sidebar>
+	<div id="content-wrapper" class="d-flex flex-column">
+		<div id="content">
+			<app-menu-top></app-menu-top>
+			<div class="container-fluid">
+				<div class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">Clientes</h1>
+					<button class="btn btn-primary" (click)="modalFormTerceros()">
+						<i class="fas fa-plus fa-sm"></i>
+						<span class="text-responsive">
+							Agregar tercero
+						</span>
+					</button>
+				</div>
+				<div class="card">
+					<div class="card-body">
+						<form class="form-group" (ngSubmit)="getListaTerceros(query_params)">
+							<div class="row">
+								<div class="col-10">
+									<div class="input-group">
+										<input type="text" class="form-control" [(ngModel)]="query_params" name="query_params" id="query_params">
+										<div class="input-group-prepend" *ngIf="query_params != '' && query_params != null">
+											<div class="input-group-text cursor" (click)="query_params = null; getListaTerceros()">
+												<i class="fas fa-times"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-2 text-center">
+									<button type="submit" class="btn btn-warning">
+										<i class="fas fa-search"></i>
+										Buscar
+									</button>
+								</div>
+							</div>
+						</form>
+						<div class="text-center p-2" *ngIf="on_loading">
+							<img [src]="_loading" alt="loading" class="loading-max">
+						</div>
+						<div class="table-responsive">
+							<table class="table table-striped table-sm table-bordered" *ngIf="!on_loading">
+								<thead>
+									<tr>
+										<th>Número documento</th>
+										<th>Nombres completos</th>
+										<th>Correo electrónico</th>
+										<th>Números contácto</th>
+										<th>Perfil</th>
+										<th>Fecha registro</th>
+										<th>Estado</th>
+										<th>Usuario registro</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let item of lista_terceros">
+										<td>{{item.numero_documento}}</td>
+										<td>{{item.nombres}} {{item.apellidos}}</td>
+										<td>{{item.correo_electronico}}</td>
+										<td>
+											{{item.numero_celular}}
+											<span *ngIf="item.numero_telefonico != null">
+												- {{item.numero_telefonico}}
+											</span>
+										</td>
+										<td>
+											<span class="badge badge-info" *ngIf="item.nombre_perfil != null">
+												{{item.nombre_perfil}}
+											</span>
+											<span class="badge badge-info" *ngIf="item.nombre_perfil == null">
+												Cliente
+											</span>
+										</td>
+										<td>{{item.fecha_registro}}</td>
+										<td>
+											<span *ngIf="item.activo && item.activo != null" class="badge badge-success">
+												Activo
+											</span>
+											<span *ngIf="!item.activo && item.activo != null" class="badge badge-danger">
+												Inactivo
+											</span>
+										</td>
+										<td>{{item.usuario_crea}}</td>
+										<td>
+											<button (click)="modalFormTerceros(item.id)" class="btn btn-sm btn-dark">
+												<i class="fas fa-pencil-alt"></i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row mt-2" *ngIf="!on_loading">
+					<div class="col-6 text-left">
+						<button type="button" class="btn btn-light" (click)="getListaTerceros(query_params, current_page - 1)" *ngIf="current_page > 1">
+							<i class="fas fa-arrow-left"></i>
+							Anterior
+						</button>
+					</div>
+					<div class="col-6 text-right">
+						<button type="button" class="btn btn-light" (click)="getListaTerceros(query_params, current_page + 1)" *ngIf="current_page < last_page">
+							Siguiente
+							<i class="fas fa-arrow-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<app-footer></app-footer>
+	</div>
+</div>

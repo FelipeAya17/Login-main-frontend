@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-6">
+            <div class="card o-hidden border-0 shadow-lg my-5" style="background-color: #F7F7F7;">
+                <div class="card-body">
+                    <div class="text-center">
+                        <img [src]="logo" class="img-fluid" style="max-width: 200px;">
+                        <!-- <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1> -->
+                    </div>
+                    <hr>
+                    <form class="user" id="loginForm" [formGroup]="loginForm" (ngSubmit)="ingresoAplicacion()">
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-user" formControlName="email" id="email" name="email" autocomplete="off" placeholder="Correo electrónico">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control form-control-user" autocomplete="off" formControlName="password" id="password" name="password" placeholder="Contraseña">
+                        </div>
+                        <button class="btn btn-success btn-user btn-block" type="submit" [disabled]="is_formulario">
+                            <img [src]="_loading" width="15" *ngIf="is_formulario">
+                            <span *ngIf="!is_formulario">
+                                Ingresar
+                            </span>
+                        </button>
+                    </form>
+                    <!-- <hr>
+                    <div class="text-center">
+                        <a class="small" href="forgot-password.html">¿Olvidó la contraseña?</a>
+                    </div> -->
+                </div>
+                <div class="card-footer text-center">
+                    <small>
+                        Desarrollado por <a href="https://quickconnection.com.co/" target="_blank">QuickConnection</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
